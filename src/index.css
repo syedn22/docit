@@ -11,3 +11,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* .tabs{
+  position: fixed;
+  top:56px;
+  z-index:3;
+}
+
+nav{
+  position: fixed;
+  top:0px;
+  z-index:3;
+} */

@@ -1,0 +1,33 @@
+.Profilepic {
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    float: right;
+    height: 4.6875rem;
+    position: relative;
+    margin-top: -3.09375rem;
+    width: 4.6875rem;
+}
+
+.card{
+    background-color: #4c4ce8;
+}
+
+li{
+    padding: 0px;
+}
+
+.tabs .tab a.active {
+    color:blue;
+
+}
+.tabs .indicator {
+    background-color: blue;
+}
+
+.tabs .tab a:hover, .tabs .tab a.active {
+    color: rgb(93, 117, 180);
+}
+
+.tabs .tab a{
+    color:rgb(139 139 141);
+}
