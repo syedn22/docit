@@ -1,15 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 
-import { View, StyleSheet, ScrollView } from "react-native";
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+  Text,
+} from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import * as DocumentPicker from "expo-document-picker";
 
 import AppTextInput from "../components/AppTextInput";
 import AppButton from "../components/AppButton";
 import AppText from "../components/AppText";
-import Screen from "../components/Screen";
 import AppDatePicker from "../components/AppDatePicker";
 
 function EventForm(props) {
+  const [documentDetails, setdocumentDetails] = useState();
+
+  const readDocument = async () => {
+    try {
+      const result = await DocumentPicker.getDocumentAsync({
+        type: "application/*",
+      });
+      setdocumentDetails(result);
+    } catch (error) {
+      console.log("Can't open file", error);
+    }
+  };
+
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -17,7 +36,8 @@ function EventForm(props) {
         <AppTextInput style={styles.textInput} placeholder="Title" />
         <AppTextInput style={styles.textArea} placeholder="Description" />
         <AppDatePicker />
-        <View
+        <TouchableOpacity
+          onPress={readDocument}
           style={{
             flexDirection: "row",
             justifyContent: "center",
@@ -29,7 +49,35 @@ function EventForm(props) {
         >
           <MaterialCommunityIcons name="paperclip" size={28} color="grey" />
           <AppText style={{ fontSize: 15 }}>Add</AppText>
-        </View>
+        </TouchableOpacity>
+        {documentDetails && (
+          <View
+            style={{
+              width: 300,
+              height: 50,
+              borderWidth: 1,
+              borderRadius: 10,
+              padding: 5,
+              margin: 10,
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center",
+              fontSize: 24,
+              flexDirection: "row",
+              overflow: "hidden",
+            }}
+          >
+            <Text style={{ width: 200, fontSize: 14 }}>
+              {documentDetails.name}
+            </Text>
+            <MaterialCommunityIcons
+              onPress={() => setdocumentDetails(null)}
+              name="close"
+              size={24}
+              color="grey"
+            />
+          </View>
+        )}
 
         <AppButton title="Submit"></AppButton>
       </View>
